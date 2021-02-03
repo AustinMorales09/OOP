@@ -7,26 +7,27 @@
 
 // Objects in JavaScript are used to model real-world objects, giving them properties and behavior just like their real-world counterparts. Here's an example using these concepts to create a duck object:
 
-// let duck = {
-//   name: "Aflac",
-//   numLegs: 2
-// };
+let duck = {
+  name: "Aflac",
+  numLegs: 2
+};
 // This duck object has two property/value pairs: a name of "Aflac" and a numLegs of 2.
 
 // Create a dog object with name and numLegs properties, and set them to a string and a number, respectively.
 let dog = {
-
+name: 'Derrick',
+numLegs: 4
 };
 
     
     //2.) Object Oriented Programming: Use Dot Notation to Access the Properties of an Object
 //     The last challenge created an object with various properties. Now you'll see how to access the values of those properties. Here's an example:
 
-// let duck = {
-//   name: "Aflac",
-//   numLegs: 2
-// };
-// console.log(duck.name);
+let duck = {
+  name: "Aflac",
+  numLegs: 2
+};
+console.log(duck.name);
 // // This prints "Aflac" to the console
 // Dot notation is used on the object name, duck, followed by the name of the property, name, to access the value of "Aflac".
 
@@ -36,18 +37,19 @@ let dog = {
         numLegs: 4
       };
       // Only change code below this line
-  
+  console.log(dog.name);
+  console.log(dog.numLegs)
   //3.) Object Oriented Programming: Create a Method on an Object
 //   Objects can have a special type of property, called a method.
 
 // Methods are properties that are functions. This adds different behavior to an object. Here is the duck example with a method:
 
-// let duck = {
-//   name: "Aflac",
-//   numLegs: 2,
-//   sayName: function() {return "The name of this duck is " + duck.name + ".";}
-// };
-// duck.sayName();
+let duck = {
+  name: "Aflac",
+  numLegs: 2,
+  sayName: function() {return "The name of this duck is " + duck.name + ".";}
+};
+duck.sayName();
 // // Returns "The name of this duck is Aflac."
 // The example adds the sayName method, which is a function that returns a sentence giving the name of the duck. Notice that the method accessed the name property in the return statement using duck.name. The next challenge will cover another way to do this.
 
@@ -55,7 +57,7 @@ let dog = {
 let dog = {
     name: "Spot",
     numLegs: 4,
-  
+    sayLegs: function() {return "This dog has " + dog.numLegs+  " legs"}
   };
   
   dog.sayLegs();
@@ -74,14 +76,14 @@ let dog = {
 //   numLegs: 2,
 //   sayName: function() {return "The name of this duck is " + this.name + ".";}
 // };
-// this is a deep topic, and the above example is only one way to use it. In the current context, this refers to the object that the method is associated with: duck. If the object's name is changed to mallard, it is not necessary to find all the references to duck in the code. It makes the code reusable and easier to read.
+// // this is a deep topic, and the above example is only one way to use it. In the current context, this refers to the object that the method is associated with: duck. If the object's name is changed to mallard, it is not necessary to find all the references to duck in the code. It makes the code reusable and easier to read.
 
 // Modify the dog.sayLegs method to remove any references to dog. Use the duck example for guidance.
 
 let dog = {
     name: "Spot",
     numLegs: 4,
-    sayLegs: function() {return "This dog has " + dog.numLegs + " legs.";}
+    sayLegs: function() {return "This dog has " + this.numLegs + " legs.";}
   };
   
   dog.sayLegs();
@@ -92,11 +94,11 @@ let dog = {
 
 // Here is an example of a constructor:
 
-// function Bird() {
-//   this.name = "Albert";
-//   this.color = "blue";
-//   this.numLegs = 2;
-// }
+function Bird() {
+  this.name = "Albert";
+  this.color = "blue";
+  this.numLegs = 2;
+}
 // This constructor defines a Bird object with properties name, color, and numLegs set to Albert, blue, and 2, respectively. Constructors follow a few conventions:
 
 // Constructors are defined with a capitalized name to distinguish them from other functions that are not constructors.
@@ -104,20 +106,24 @@ let dog = {
 // Constructors define properties and behaviors instead of returning a value as other functions might.
 // Create a constructor, Dog, with properties name, color, and numLegs that are set to a string, a string, and a number, respectively.
 
-
+function Dog(){
+  this.name = 'Fido';
+  this.color ='Brown';
+  this.numLegs = 2;
+}
 
 
     //6.) Object Oriented Programming: Use a Constructor to Create Objects
 //     Here's the Bird constructor from the previous challenge:
 
-// function Bird() {
-//   this.name = "Albert";
-//   this.color  = "blue";
-//   this.numLegs = 2;
+function Bird() {
+  this.name = "Albert";
+  this.color  = "blue";
+  this.numLegs = 2;
 //   // "this" inside the constructor always refers to the object being created
-// }
+}
 
-// let blueBird = new Bird();
+let blueBird = new Bird();
 // Notice that the new operator is used when calling a constructor. This tells JavaScript to create a new instance of Bird called blueBird. Without the new operator, this inside the constructor would not point to the newly created object, giving unexpected results. Now blueBird has all the properties defined inside the Bird constructor:
 
 // blueBird.name; // => Albert
@@ -135,22 +141,22 @@ function Dog() {
     this.numLegs = 4;
   }
   // Only change code below this line
-
+let hound =  new Dog();
 
 
     //7.)Object Oriented Programming: Extend Constructors to Receive Arguments
 //     The Bird and Dog constructors from last challenge worked well. However, notice that all Birds that are created with the Bird constructor are automatically named Albert, are blue in color, and have two legs. What if you want birds with different values for name and color? It's possible to change the properties of each bird manually but that would be a lot of work:
 
-// let swan = new Bird();
-// swan.name = "Carlos";
-// swan.color = "white";
+let swan = new Bird();
+swan.name = "Carlos";
+swan.color = "white";
 // Suppose you were writing a program to keep track of hundreds or even thousands of different birds in an aviary. It would take a lot of time to create all the birds, then change the properties to different values for every one. To more easily create different Bird objects, you can design your Bird constructor to accept parameters:
 
-// function Bird(name, color) {
-//   this.name = name;
-//   this.color = color;
-//   this.numLegs = 2;
-// }
+function Bird(name, color) {
+  this.name = name;
+  this.color = color;
+  this.numLegs = 2;
+}
 // Then pass in the values as arguments to define each unique bird into the Bird constructor: let cardinal = new Bird("Bruce", "red"); This gives a new instance of Bird with name and color properties set to Bruce and red, respectively. The numLegs property is still set to 2. The cardinal has these properties:
 
 // cardinal.name // => Bruce
@@ -166,7 +172,10 @@ function Dog() {
       this.numLegs = 4;
     }
     let terrier = new Dog("George", "White");
-  
+    let poodle = new Dog("Spooks", "black");
+    let bullDog = new Dog("kin", "black");
+    let beagle = new Dog("Chloe", "Brown");
+    let bloodhound = new Dog('Clifford', 'Red')
     //8.)Object Oriented Programming: Verify an Object's Constructor with instanceof
 //     Anytime a constructor function creates a new object, that object is said to be an instance of its constructor. JavaScript gives a convenient way to verify this with the instanceof operator. instanceof allows you to compare an object to a constructor, returning true or false based on whether or not that object was created with the constructor. Here's an example:
 
@@ -193,6 +202,8 @@ function House(numBedrooms) {
     this.numBedrooms = numBedrooms;
   }
   
+  let myHouse = new House(5);
+  myHouse instanceof House;
   // Only change code below this line
     //9.)Object Oriented Programming: Understand Own Properties
 //     In the following example, the Bird constructor defines two properties: name and numLegs:
@@ -204,15 +215,16 @@ function House(numBedrooms) {
 
 // let duck = new Bird("Donald");
 // let canary = new Bird("Tweety");
-// name and numLegs are called own properties, because they are defined directly on the instance object. That means that duck and canary each has its own separate copy of these properties. In fact every instance of Bird will have its own copy of these properties. The following code adds all of the own properties of duck to the array ownProps:
+// name and numLegs are called own properties, because they are defined directly on the instance object. That means that duck and canary each has its own separate copy of these properties. In fact every instance of Bird will have its own copy of these properties.
+//  The following code adds all of the own properties of duck to the array ownProps:
 
-// let ownProps = [];
+let ownProps = [];
 
-// for (let property in duck) {
-//   if(duck.hasOwnProperty(property)) {
-//     ownProps.push(property);
-//   }
-// }
+for (let property in duck) {
+  if(duck.hasOwnProperty(property)) {
+    ownProps.push(property);
+  }
+}
 
 // console.log(ownProps); // prints [ "name", "numLegs" ]
 // Add the own properties of canary to the array ownProps.
@@ -224,7 +236,11 @@ function Bird(name) {
   let canary = new Bird("Tweety");
   let ownProps = [];
   // Only change code below this line
-
+for(let property in canary ){
+  if(canary.hasOwnProperty(property)){
+    ownProps.push(property);
+  }
+}
   
   
     //10.)Object Oriented Programming: Use Prototype Properties to Reduce Duplicate Code
@@ -247,7 +263,8 @@ function Dog(name) {
   }
   
   
-  
+  Dog.prototype.numLegs = 4;
+  Dog.prototype.bark = 'woof'
   // Only change code above this line
   let beagle = new Dog("Snoopy");
 
@@ -256,28 +273,29 @@ function Dog(name) {
     //11.)Object Oriented Programming: Iterate Over All Properties
 //     You have now seen two kinds of properties: own properties and prototype properties. Own properties are defined directly on the object instance itself. And prototype properties are defined on the prototype.
 
-// function Bird(name) {
-//   this.name = name;  //own property
-// }
+function Bird(name) {
+  this.name = name;  //own property
+}
 
-// Bird.prototype.numLegs = 2; // prototype property
+Bird.prototype.numLegs = 2; // prototype property
 
 // let duck = new Bird("Donald");
 // Here is how you add duck's own properties to the array ownProps and prototype properties to the array prototypeProps:
 
-// let ownProps = [];
-// let prototypeProps = [];
+let ownProps = [];
+let prototypeProps = [];
 
-// for (let property in duck) {
-//   if(duck.hasOwnProperty(property)) {
-//     ownProps.push(property);
-//   } else {
-//     prototypeProps.push(property);
-//   }
-// }
+for (let property in duck) {
+  if(duck.hasOwnProperty(property)) {
+    ownProps.push(property);
+  } else {
+    prototypeProps.push(property);
+  }
+}
 
 // console.log(ownProps); // prints ["name"]
 // console.log(prototypeProps); // prints ["numLegs"]
+
 // Add all of the own properties of beagle to the array ownProps. Add all of the prototype properties of Dog to the array prototypeProps.
 function Dog(name) {
     this.name = name;
@@ -291,7 +309,13 @@ function Dog(name) {
   let prototypeProps = [];
   
   // Only change code below this line
-
+for(let property in beagle){
+  if(Dog.hasOwnProperty(property)){
+    ownProps.push(property);
+  } else {
+    prototypeProps.push(property)
+  }
+}
 
 
     
@@ -300,19 +324,19 @@ function Dog(name) {
 //     There is a special constructor property located on the object instances duck and beagle that were created in the previous challenges:
 
 // let duck = new Bird();
-// let beagle = new Dog();
+
 
 // console.log(duck.constructor === Bird);  //prints true
 // console.log(beagle.constructor === Dog);  //prints true
 // Note that the constructor property is a reference to the constructor function that created the instance. The advantage of the constructor property is that it's possible to check for this property to find out what kind of object it is. Here's an example of how this could be used:
 
-// function joinBirdFraternity(candidate) {
-//   if (candidate.constructor === Bird) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
+function joinBirdFraternity(candidate) {
+  if (candidate.constructor === Bird) {
+    return true;
+  } else {
+    return false;
+  }
+}
 // Note
 // Since the constructor property can be overwritten (which will be covered in the next two challenges) it’s generally better to use the instanceof method to check the type of an object.
 
@@ -323,9 +347,13 @@ function Dog(name) {
   
   // Only change code below this line
   function joinDogFraternity(candidate) {
-  
+  if(candidate.constructor === Dog){
+    return true;
+  } else {
+    return false;
   }
-
+  }
+  let beagle = new Dog();
 
    
   
@@ -360,7 +388,13 @@ function Dog(name) {
       }
       
       Dog.prototype = {
-        // Only change code below this line
+        numLegs: 4,
+        eat: function(){
+          console.log('yum');
+        },
+        describe: function(){
+          console.log('I have ' + this.numLegs + " Legs")
+        }
       
       };
 
@@ -391,7 +425,7 @@ function Dog(name) {
       
       // Only change code below this line
       Dog.prototype = {
-      
+        constructor: Dog,
         numLegs: 4,
         eat: function() {
           console.log("nom nom nom");
@@ -413,7 +447,7 @@ function Dog(name) {
     //   let duck = new Bird("Donald");
     //   duck inherits its prototype from the Bird constructor function. You can show this relationship with the isPrototypeOf method:
       
-    //   Bird.prototype.isPrototypeOf(duck);
+      Bird.prototype.isPrototypeOf(duck);
     //   // returns true
     //   Use isPrototypeOf to check the prototype of beagle.
 
@@ -424,7 +458,7 @@ function Dog(name) {
   let beagle = new Dog("Snoopy");
   
   // Add your code below this line
-
+ Dog.prototype.isPrototypeOf(beagle)
   //16.)Object Oriented Programming: Understand the Prototype Chain
  
 //   All objects in JavaScript (with a few exceptions) have a prototype. Also, an object’s prototype itself is an object.
@@ -455,7 +489,7 @@ function Dog(name) {
   Dog.prototype.isPrototypeOf(beagle); // => true
   
   // Fix the code below so that it evaluates to true
-  ???.prototype.isPrototypeOf(Dog.prototype);
+Object.prototype.isPrototypeOf(Dog.prototype);
 
 
   //17.)Object Oriented Programming: Use Inheritance So You Don't Repeat Yourself
@@ -502,9 +536,7 @@ function Cat(name) {
   
   Cat.prototype = {
     constructor: Cat,
-    eat: function() {
-      console.log("nom nom nom");
-    }
+ 
   };
   
   function Bear(name) {
@@ -513,16 +545,16 @@ function Cat(name) {
   
   Bear.prototype = {
     constructor: Bear,
-    eat: function() {
-      console.log("nom nom nom");
-    }
+   
   };
-  
+  let brownBear = new Bear();
   function Animal() { }
   
   Animal.prototype = {
     constructor: Animal,
-  
+    eat: function() {
+      console.log("nom nom nom");
+    }
   };
 
 
@@ -555,8 +587,8 @@ Animal.prototype = {
 
 // Only change code below this line
 
-let duck; // Change this line
-let beagle; // Change this line
+let duck = Object.create(Animal.prototype); // Change this line
+let beagle= Object.create(Animal.prototype); // Change this line
 
  
 duck.eat(); // Should print "nom nom nom"
@@ -568,11 +600,11 @@ beagle.eat(); // Should print "nom nom nom"
 
 // This challenge covers the next step: set the prototype of the subtype (or child)—in this case, Bird—to be an instance of Animal.
 
-// Bird.prototype = Object.create(Animal.prototype);
+Bird.prototype = Object.create(Animal.prototype);
 // Remember that the prototype is like the "recipe" for creating an object. In a way, the recipe for Bird now includes all the key "ingredients" from Animal.
 
-// let duck = new Bird("Donald");
-// duck.eat(); // prints "nom nom nom"
+let duck = new Bird("Donald");
+duck.eat(); // prints "nom nom nom"
 // duck inherits all of Animal's properties, including the eat method.
 
 // Modify the code so that instances of Dog inherit from Animal.
@@ -588,7 +620,7 @@ Animal.prototype = {
 function Dog() { }
 
 // Only change code below this line
-
+Dog.prototype = Object.create(Animal.prototype);
 
 let beagle = new Dog();
 
@@ -618,7 +650,8 @@ Bird.prototype = Object.create(Animal.prototype);
 Dog.prototype = Object.create(Animal.prototype);
 
 // Only change code below this line
-
+Bird.prototype.constructor = Bird;
+Dog.prototype.constructor = Dog
 
 
 let duck = new Bird();
@@ -628,13 +661,13 @@ let beagle = new Dog();
 
 // For example, Bird is a constructor that inherits its prototype from Animal:
 
-// function Animal() { }
-// Animal.prototype.eat = function() {
-//   console.log("nom nom nom");
-// };
-// function Bird() { }
-// Bird.prototype = Object.create(Animal.prototype);
-// Bird.prototype.constructor = Bird;
+function Animal() { }
+Animal.prototype.eat = function() {
+  console.log("nom nom nom");
+};
+function Bird() { }
+Bird.prototype = Object.create(Animal.prototype);
+Bird.prototype.constructor = Bird;
 // In addition to what is inherited from Animal, you want to add behavior that is unique to Bird objects. Here, Bird will get a fly() function. Functions are added to Bird's prototype the same way as any constructor function:
 
 // Bird.prototype.fly = function() {
@@ -646,8 +679,11 @@ let beagle = new Dog();
 // duck.eat(); // prints "nom nom nom"
 // duck.fly(); // prints "I'm flying!"
 // Add all necessary code so the Dog object inherits from Animal and the Dog's prototype constructor is set to Dog. Then add a bark() method to the Dog object so that beagle can both eat() and bark(). The bark() method should print "Woof!" to the console.
-// //solution
-
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+Dog.prototype.bark = function() {
+  console.log('woof')
+}
 
 //22.)Object Oriented Programming: Override Inherited Methods
 // In previous lessons, you learned that an object can inherit its behavior (methods) from another object by referencing its prototype object:
@@ -658,25 +694,26 @@ let beagle = new Dog();
 // ChildObject.prototype.methodName = function() {...};
 // It's possible to override an inherited method. It's done the same way - by adding a method to ChildObject.prototype using the same method name as the one to override. Here's an example of Bird overriding the eat() method inherited from Animal:
 
-// function Animal() { }
-// Animal.prototype.eat = function() {
-//   return "nom nom nom";
-// };
-// function Bird() { }
+function Animal() { }
+Animal.prototype.eat = function() {
+  return "nom nom nom";
+};
+function Bird() { }
 
-// // Inherit all methods from Animal
-// Bird.prototype = Object.create(Animal.prototype);
+// Inherit all methods from Animal
+Bird.prototype = Object.create(Animal.prototype);
 
-// // Bird.eat() overrides Animal.eat()
-// Bird.prototype.eat = function() {
-//   return "peck peck peck";
-// };
+// Bird.eat() overrides Animal.eat()
+Bird.prototype.eat = function() {
+  return "peck peck peck";
+};
 // If you have an instance let duck = new Bird(); and you call duck.eat(), this is how JavaScript looks for the method on duck’s prototype chain:
 
 // duck => Is eat() defined here? No.
 // Bird => Is eat() defined here? => Yes. Execute it and stop searching.
 // Animal => eat() is also defined, but JavaScript stopped searching before reaching this level.
 // Object => JavaScript stopped searching before reaching this level.
+
 // Override the fly() method for Penguin so that it returns "Alas, this is a flightless bird."
 
 function Bird() { }
@@ -688,7 +725,9 @@ Penguin.prototype = Object.create(Bird.prototype);
 Penguin.prototype.constructor = Penguin;
 
 // Only change code below this line
-
+Penguin.prototype.fly = function(){
+  return "Alas, this is a flightless bird.";
+}
 
 
 // Only change code above this line
@@ -701,33 +740,44 @@ console.log(penguin.fly());
 
 //   For unrelated objects, it's better to use mixins. A mixin allows other objects to use a collection of functions.
   
-//   let flyMixin = function(obj) {
-//     obj.fly = function() {
-//       console.log("Flying, wooosh!");
-//     }
-//   };
-//   The flyMixin takes any object and gives it the fly method.
+  // let flyMixin = function(obj) {
+  //   obj.fly = function() {
+  //     console.log("Flying, wooosh!");
+  //   }
+  // };
+  // The flyMixin takes any object and gives it the fly method.
   
-//   let bird = {
-//     name: "Donald",
-//     numLegs: 2
-//   };
+  // let bird = {
+  //   name: "Donald",
+  //   numLegs: 2
+  // };
   
-//   let plane = {
-//     model: "777",
-//     numPassengers: 524
-//   };
+  // let plane = {
+  //   model: "777",
+  //   numPassengers: 524
+  // };
   
-//   flyMixin(bird);
-//   flyMixin(plane);
+  // flyMixin(bird);
+  // flyMixin(plane);
 //   Here bird and plane are passed into flyMixin, which then assigns the fly function to each object. Now bird and plane can both fly:
   
-//   bird.fly(); // prints "Flying, wooosh!"
-//   plane.fly(); // prints "Flying, wooosh!"
+  bird.fly(); // prints "Flying, wooosh!"
+  plane.fly(); // prints "Flying, wooosh!"
 //   Note how the mixin allows for the same fly method to be reused by unrelated objects bird and plane.
   
 //   Create a mixin named glideMixin that defines a method named glide. Then use the glideMixin to give both bird and boat the ability to glide.
  
+let glideMixin = function(obj){
+  obj.glide = function(){
+    console.log('Gliding!');
+  }
+}
+
+glideMixin(duck);
+glideMixin(boat);
+
+
+
 
   //24.)Object Oriented Programming: Use Closure to Protect Properties Within an Object from Being Modified Externally
 //   In the previous challenge, bird had a public property name. It is considered public because it can be accessed and changed outside of bird's definition.
@@ -751,23 +801,29 @@ console.log(penguin.fly());
   
 //   Change how weight is declared in the Bird function so it is a private variable. Then, create a method getWeight that returns the value of weight 15.
 function Bird() {
-    this.weight = 15;
+    let weight = 15;
+    this.getWeight = function(){
+      return weight;
+     
+    }
   
-  
+   console.log(weight)
   }
 
   //25.)Object Oriented Programming: Understand the Immediately Invoked Function Expression (IIFE)
 //   A common pattern in JavaScript is to execute a function as soon as it is declared:
 
-//   (function () {
-//     console.log("Chirp, chirp!");
-//   })(); // this is an anonymous function expression that executes right away
+  (function () {
+    console.log("Chirp, chirp!");
+  })(); // this is an anonymous function expression that executes right away
 //   // Outputs "Chirp, chirp!" immediately
 //   Note that the function has no name and is not stored in a variable. The two parentheses () at the end of the function expression cause it to be immediately executed or invoked. This pattern is known as an immediately invoked function expression or IIFE.
   
 //   Rewrite the function makeNest and remove its call so instead it's an anonymous immediately invoked function expression (IIFE).
  
-
+(function() {
+  console.log("This is a cozy nest")
+})();
   //26.)Object Oriented Programming: Use an IIFE to Create a Module
 //   An immediately invoked function expression (IIFE) is often used to group related functionality into a single object or module. For example, an earlier challenge defined two mixins:
 
@@ -802,15 +858,17 @@ function Bird() {
 //   motionModule.glideMixin(duck);
 //   duck.glide();
 //   Create a module named funModule to wrap the two mixins isCuteMixin and singMixin. funModule should return an object.
-let isCuteMixin = function(obj) {
-    obj.isCute = function() {
-      return true;
-    };
+let funModule = (function() {
+  return {
+    isCuteMixin: function(obj){
+      obj.isCute = function(){
+        return true;
+      };
+    },
+    singMixin: function(obj){
+      obj.sing = function(){
+        console.log('Singing is fun')
+      }
+    }
   };
-  let singMixin = function(obj) {
-    obj.sing = function() {
-      console.log("Singing to an awesome tune");
-    };
-  };
-  
-
+})();
